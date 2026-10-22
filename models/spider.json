@@ -1,0 +1,1 @@
+{"v": 2, "count": 969084, "indices": 3000000, "parts": ["spider.geo.0.txt", "spider.geo.1.txt", "spider.geo.2.txt", "spider.geo.3.txt", "spider.geo.4.txt"], "tex": {"normal": "spider-normal.png", "map": "spider-map.png", "mr": "spider-mr.png"}, "mat": {"metalness": 1, "roughness": 1, "color": [1, 1, 1], "doubleSided": true, "unlit": false}}
