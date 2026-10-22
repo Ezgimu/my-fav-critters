@@ -180,6 +180,7 @@ h1{font:var(--t-h1);letter-spacing:-.01em;margin:0;text-wrap:balance}
 
 @media (max-width:960px){
   .split{grid-template-columns:minmax(0,1fr);row-gap:16px}
+  .nav.split{grid-template-columns:minmax(0,1fr) auto;column-gap:12px}
   .stage{min-height:clamp(380px,58vh,560px)}
 }
 @media (max-width:480px){
@@ -442,7 +443,9 @@ const SC = (() => {
     }).join("");
   }
 
-  const full = (id, body) => `<svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" style="inset:0;width:100%;height:100%" aria-hidden="true">${defs(id)}<g filter="url(#${id})">${body}</g></svg>`;
+  /* the wobble filter covers the whole page-sized drawing; phones (small, high-density screens) can fail to paint it, so it is skipped there */
+  const wobble = !(matchMedia("(max-width:960px)").matches || matchMedia("(pointer:coarse)").matches);
+  const full = (id, body) => `<svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" style="inset:0;width:100%;height:100%" aria-hidden="true">${defs(id)}<g${wobble ? ` filter="url(#${id})"` : ""}>${body}</g></svg>`;
   const corner = (id, body, style, flip) => `<svg viewBox="0 0 420 420" style="${style}${flip}" aria-hidden="true">${defs(id)}<g filter="url(#${id})">${body}</g></svg>`;
   return {
     luna: full("rough-luna", flowers(13)),
@@ -906,12 +909,20 @@ async function loadJsonModel(url, look, progress){
   const res = await fetch(url); if(!res.ok) throw new Error(res.status);
   const d = await res.json(), base = url.slice(0, url.lastIndexOf("/")+1), n = d.count;
   const g = new THREE.BufferGeometry();
+  /* textures start downloading right away, alongside the geometry parts, instead of after them */
+  const tl = new THREE.TextureLoader(), aniso = renderer.capabilities.getMaxAnisotropy();
+  const tex = (f, srgb) => { const t = tl.load(base+f); t.flipY = false; t.anisotropy = Math.min(8, aniso); if(srgb) t.encoding = THREE.sRGBEncoding; return t; };
+  const T = {map: d.tex.map ? tex(d.tex.map, true) : null};
+  if(!d.mat.unlit){ T.normal = d.tex.normal ? tex(d.tex.normal) : null; T.mr = d.tex.mr ? tex(d.tex.mr) : null; }
   if(d.v === 2){ /* full-resolution float geometry, split into base64 text parts */
-    const buf = new Uint8Array(n*32 + d.indices*4); let o = 0;
-    for(let k=0;k<d.parts.length;k++){
-      const r = await fetch(base + d.parts[k]); if(!r.ok) throw new Error(r.status);
-      const bin = atob(await r.text()); for(let q=0;q<bin.length;q++) buf[o++] = bin.charCodeAt(q);
-      if(progress) progress((k+1)/d.parts.length);
+    const buf = new Uint8Array(n*32 + d.indices*4); let o = 0, got = 0;
+    /* all parts download at once; they are decoded in order as each one is ready */
+    const parts = d.parts.map(async p => {
+      const r = await fetch(base + p); if(!r.ok) throw new Error(r.status);
+      const s = await r.text(); if(progress) progress(++got/d.parts.length); return s;
+    });
+    for(let k=0;k<parts.length;k++){
+      const bin = atob(await parts[k]); parts[k] = null; for(let q=0;q<bin.length;q++) buf[o++] = bin.charCodeAt(q);
     }
     const B = buf.buffer;
     g.setAttribute("position", new THREE.BufferAttribute(new Float32Array(B, 0, n*3), 3));
@@ -925,14 +936,12 @@ async function loadJsonModel(url, look, progress){
   g.setAttribute("uv", new THREE.BufferAttribute(deq(new Uint16Array(b64(d.uv.data)), n, 2, d.uv.min, d.uv.max), 2));
   g.setIndex(new THREE.BufferAttribute(new Uint32Array(b64(d.idx)), 1));
   }
-  const tl = new THREE.TextureLoader(), aniso = renderer.capabilities.getMaxAnisotropy();
-  const tex = (f, srgb) => { const t = tl.load(base+f); t.flipY = false; t.anisotropy = Math.min(8, aniso); if(srgb) t.encoding = THREE.sRGBEncoding; return t; };
   if(d.mat.unlit){ /* lighting is baked into the texture: draw it flat, no shine */
-    return {scene: new THREE.Mesh(g, new THREE.MeshBasicMaterial({map: tex(d.tex.map, true), side: d.mat.doubleSided ? THREE.DoubleSide : THREE.FrontSide})), animations: []};
+    return {scene: new THREE.Mesh(g, new THREE.MeshBasicMaterial({map: T.map, side: d.mat.doubleSided ? THREE.DoubleSide : THREE.FrontSide})), animations: []};
   }
-  const mr = d.tex.mr ? tex(d.tex.mr) : null;
+  const mr = T.mr;
   const m = new THREE.MeshStandardMaterial({
-    map: d.tex.map ? tex(d.tex.map, true) : null, normalMap: d.tex.normal ? tex(d.tex.normal) : null,
+    map: T.map, normalMap: T.normal,
     roughnessMap: mr, metalnessMap: mr, metalness: d.mat.metalness, roughness: d.mat.roughness,
     color: new THREE.Color().fromArray(d.mat.color), side: d.mat.doubleSided ? THREE.DoubleSide : THREE.FrontSide });
   m.normalScale.set(1, -1);
