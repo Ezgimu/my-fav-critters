@@ -1,0 +1,1 @@
+{"v": 2, "count": 21300, "indices": 115326, "parts": ["ladybug.geo.0.txt"], "tex": {"normal": "ladybug-normal.png", "map": "ladybug-map.png", "mr": "ladybug-mr.png"}, "mat": {"metalness": 1, "roughness": 1, "color": [1, 1, 1], "doubleSided": true, "unlit": false}}
