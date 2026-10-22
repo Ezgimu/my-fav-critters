@@ -59,8 +59,9 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stro
 .icon-btn{width:var(--ctl);height:var(--ctl);flex:none;display:grid;place-items:center;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--ink)}
 .icon-btn:hover{border-color:var(--line-strong)}
 /* theme button: Material 3 small icon button proportions (icon ≈ 0.6 of the container), with a 48px touch target around the smaller circle */
-#themeBtn{width:36px;height:36px}
-#themeBtn svg.i{width:22px;height:22px}
+#themeBtn{width:36px;height:36px;padding:0}
+/* the icon is pinned to the exact centre instead of relying on grid centring, which Safari on iPhone placed off to one side */
+#themeBtn svg.i{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;pointer-events:none}
 #themeBtn::before{content:"";position:absolute;inset:-7px;border-radius:50%}
 /* theme button shows the current theme: sun in light, moon in dark */
 :root{--sun:inline;--moon-ico:none}
