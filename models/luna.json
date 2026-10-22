@@ -1,0 +1,1 @@
+{"v": 2, "count": 587871, "indices": 3000000, "parts": ["luna.geo.0.txt", "luna.geo.1.txt", "luna.geo.2.txt", "luna.geo.3.txt"], "tex": {"normal": "luna-normal.png", "map": "luna-map.png", "mr": "luna-mr.png"}, "mat": {"metalness": 1, "roughness": 1, "color": [1, 1, 1], "doubleSided": true, "unlit": false}}
