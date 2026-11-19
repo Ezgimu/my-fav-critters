@@ -3,37 +3,41 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,600&family=Instrument+Sans:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Space+Mono:wght@400;700&display=swap">
 <style>
 /* Layout: two-column split (stage | detail panel). Nav, tabs and main share one grid so the panel column is a single vertical line from top to bottom. */
 :root{
-  --bg:#F1F4F9; --surface:#FBFCFE; --sunk:#E6EBF3; --ink:#18213A; --muted:#58647B;
-  --line:#D7DEEA; --line-strong:#B2BED2; --accent:#2A5598; --accent-soft:#DCE6F6; --signal:#C47D2E; --heart:#C9372C;
-  --leaf:#86AC80; --leaf-2:#A7C59A; --stem:#6C9466; --vein:#5D8458; --petal:#EDB9C9; --petal-2:#F2DDA6; --petal-3:#C8B5E6; --bloom-centre:#E3A84B; --web:#8E99AC; --aphid:#C9E39B; --moon:#F3E9C6; --scene-alpha:.6; --sketch:#5E544A; --daisy:#FFFDF6; --petal-4:#B9D3F0; --petal-5:#F2A98F; --leaf-3:#C3D7A8; --dew:#EAF2FB; --petal-6:#F6BC84; --petal-7:#DE93BB;
-  --shadow-a:.20;
-  --serif:"Newsreader","Iowan Old Style",Georgia,serif;
-  --sans:"Instrument Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+  /* editorial line style: warm paper, near-black ink, one sage accent */
+  --bg:#F6F5F1; --surface:#F6F5F1; --sunk:#ECEDE7; --ink:#1C1C1A; --muted:#6C6E66;
+  --line:#D9D8D1; --line-strong:#8E8D86; --accent:#6B735E; --accent-soft:#E6E8E1; --signal:#6B735E; --heart:#6B735E;
+  /* habitat drawings as line art: pale fills, ink outlines */
+  --leaf:#E9EBE4; --leaf-2:#E2E5DC; --stem:#8C8F84; --vein:#9A9D91; --petal:#EFE7E6; --petal-2:#EEEADC; --petal-3:#E8E6EE; --bloom-centre:#DCD8C8; --web:#8E8D86; --aphid:#DDE3CF; --moon:#ECE9DF; --scene-alpha:.75; --sketch:#2B2B28; --daisy:#FBFAF7; --petal-4:#E3E8EE; --petal-5:#F0E6E0; --leaf-3:#EEEFE9; --dew:#FFFFFF; --petal-6:#EFE8DD; --petal-7:#EEE3E8;
+  --shadow-a:.14;
+  --serif:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --display:"DM Serif Display",Georgia,serif;
+  --mono:"Space Mono",ui-monospace,Menlo,monospace;
+  --sans:var(--mono);
   /* type scale (4px baseline) */
-  --t-h1:500 2.5rem/2.75rem var(--serif);
-  --t-h2:500 1.25rem/1.75rem var(--serif);
-  --t-body:400 .9375rem/1.5rem var(--sans);
-  --t-small:400 .8125rem/1.25rem var(--sans);
-  --t-label:600 .6875rem/1rem var(--sans);
+  --t-h1:400 2.75rem/2.75rem var(--display);
+  --t-h2:400 1.375rem/1.75rem var(--display);
+  --t-body:400 .9375rem/1.5rem var(--serif);
+  --t-small:400 .875rem/1.25rem var(--serif);
+  --t-label:400 .625rem/1rem var(--mono);
   /* spacing */
   --gutter:24px; --pad:16px; --panel-w:clamp(340px,31vw,420px);
-  --ctl:40px; --r-card:16px; --r-ctl:12px;
+  --ctl:40px; --r-card:0; --r-ctl:0;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#0D1422; --surface:#141C2D; --sunk:#101828; --ink:#E7EBF3; --muted:#9BA7BC;
-  --line:#243049; --line-strong:#3B4A68; --accent:#8DB4F2; --accent-soft:#1C2A45; --signal:#E8B062; --heart:#F2786C;
-  --leaf:#2E4A38; --leaf-2:#365842; --stem:#2B4534; --vein:#23392B; --petal:#6E4A5C; --petal-2:#6C5E3E; --petal-3:#4F4577; --bloom-centre:#8C6A32; --web:#55627E; --aphid:#55703A; --moon:#2A3552; --scene-alpha:.55; --sketch:#8D96AB; --daisy:#3A4256; --petal-4:#3A4E6E; --petal-5:#6E4638; --leaf-3:#3F5A3C; --dew:#1F2A40; --petal-6:#6E5032; --petal-7:#5E3550;
-  --shadow-a:.55; color-scheme:dark;
+  --bg:#161614; --surface:#161614; --sunk:#22241F; --ink:#ECEBE6; --muted:#A2A399;
+  --line:#33332F; --line-strong:#6E6E66; --accent:#AEB89C; --accent-soft:#2A2D24; --signal:#AEB89C; --heart:#AEB89C;
+  --leaf:#22241F; --leaf-2:#252821; --stem:#5D6056; --vein:#4C4F46; --petal:#262426; --petal-2:#26251F; --petal-3:#232228; --bloom-centre:#3A372C; --web:#5A5A54; --aphid:#2E3427; --moon:#2B2B27; --scene-alpha:.75; --sketch:#8E8F86; --daisy:#2A2A27; --petal-4:#20242A; --petal-5:#28221F; --leaf-3:#1F211C; --dew:#2A2A27; --petal-6:#27241E; --petal-7:#272126;
+  --shadow-a:.5; color-scheme:dark;
 }}
 :root[data-theme="dark"]{
-  --bg:#0D1422; --surface:#141C2D; --sunk:#101828; --ink:#E7EBF3; --muted:#9BA7BC;
-  --line:#243049; --line-strong:#3B4A68; --accent:#8DB4F2; --accent-soft:#1C2A45; --signal:#E8B062; --heart:#F2786C;
-  --leaf:#2E4A38; --leaf-2:#365842; --stem:#2B4534; --vein:#23392B; --petal:#6E4A5C; --petal-2:#6C5E3E; --petal-3:#4F4577; --bloom-centre:#8C6A32; --web:#55627E; --aphid:#55703A; --moon:#2A3552; --scene-alpha:.55; --sketch:#8D96AB; --daisy:#3A4256; --petal-4:#3A4E6E; --petal-5:#6E4638; --leaf-3:#3F5A3C; --dew:#1F2A40; --petal-6:#6E5032; --petal-7:#5E3550;
-  --shadow-a:.55; color-scheme:dark;
+  --bg:#161614; --surface:#161614; --sunk:#22241F; --ink:#ECEBE6; --muted:#A2A399;
+  --line:#33332F; --line-strong:#6E6E66; --accent:#AEB89C; --accent-soft:#2A2D24; --signal:#AEB89C; --heart:#AEB89C;
+  --leaf:#22241F; --leaf-2:#252821; --stem:#5D6056; --vein:#4C4F46; --petal:#262426; --petal-2:#26251F; --petal-3:#232228; --bloom-centre:#3A372C; --web:#5A5A54; --aphid:#2E3427; --moon:#2B2B27; --scene-alpha:.75; --sketch:#8E8F86; --daisy:#2A2A27; --petal-4:#20242A; --petal-5:#28221F; --leaf-3:#1F211C; --dew:#2A2A27; --petal-6:#27241E; --petal-7:#272126;
+  --shadow-a:.5; color-scheme:dark;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font:var(--t-body);-webkit-font-smoothing:antialiased}
@@ -49,7 +53,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stro
 .nav{align-items:center;min-height:var(--ctl)}
 .brand{display:flex;align-items:center;gap:12px;min-width:0}
 .brand-mark{width:var(--ctl);height:var(--ctl);border-radius:var(--r-ctl);background:var(--accent);color:var(--bg);display:grid;place-items:center;flex:none}
-.brand-name{font:600 1.75rem/2rem "Fraunces",var(--serif);letter-spacing:-.01em;margin:0;white-space:nowrap}
+.brand-name{font:400 1.75rem/2rem var(--display);letter-spacing:-.01em;margin:0;white-space:nowrap}
 .brand-name em{font-style:italic;color:var(--signal)}
 .brand-name .heart{display:inline-block;width:.72em;height:.72em;margin-left:.18em;vertical-align:-.02em;color:var(--signal);transform-origin:50% 60%;transition:transform .2s}
 .brand-name .heart svg{display:block;width:100%;height:100%;fill:currentColor}
@@ -120,27 +124,6 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.6;stro
 .ringctl{position:absolute;z-index:50;bottom:16px;left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:8px;padding:4px;border-radius:999px;background:var(--surface);border:1px solid var(--line);cursor:default}
 .ringctl .icon-btn{width:36px;height:36px;border:0;background:transparent}
 .ringctl .icon-btn:hover{background:var(--sunk)}
-/* habitat scene: page background around the stage and panel; the stage and cards stay opaque so the model area is clean and text stays readable */
-.scene{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.shell{position:relative;z-index:1}
-.scene-layer{position:absolute;inset:0;opacity:0;transition:opacity .5s ease}
-.scene-layer.on{opacity:var(--scene-alpha)}
-/* a soft halo in the page colour keeps text crisp wherever a stem or thread passes behind it */
-.brand-name,h1,.latin,.desc,.panel-body > .label,.quote-txt{text-shadow:0 0 3px var(--bg),0 0 8px var(--bg),0 0 14px var(--bg)}
-.scene-layer svg{position:absolute;display:block;overflow:visible}
-.sway{transform-box:fill-box;transform-origin:50% 100%;animation:sway 6s ease-in-out infinite alternate}
-.sway-slow{animation:sway-slow 9s ease-in-out infinite alternate}
-@keyframes sway{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
-@keyframes sway-slow{from{translate:0 0}to{translate:0 -6px}}
-.moon{position:absolute;top:max(88px,12vh);right:max(20px,3vw);width:clamp(44px,5vw,72px);aspect-ratio:1;border-radius:50%;background:var(--moon);box-shadow:0 0 0 14px color-mix(in srgb,var(--moon) 35%,transparent),0 0 0 30px color-mix(in srgb,var(--moon) 15%,transparent)}
-.silk{position:absolute;right:max(24px,4vw);top:0;width:1px;height:26vh;background:var(--web);opacity:.7}
-.silk::after{content:"";position:absolute;left:-2px;bottom:-2px;width:5px;height:5px;border-radius:50%;background:var(--web)}
-@media (prefers-reduced-motion:reduce){.sway,.sway-slow{animation:none}}
-/* spider webs: line art from the supplied drawing, used as a mask so it takes the page's web colour */
-.web-art{position:absolute;background:var(--web);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-size:100% 100%;mask-size:100% 100%}
-.web-1{--w:min(56vw,760px);width:var(--w);aspect-ratio:1000/1430;left:calc(var(--w) * -0.29);top:calc(var(--w) * -0.29);-webkit-mask-image:url(art/web-1.png);mask-image:url(art/web-1.png)}
-.web-2{--w:min(54vw,740px);width:var(--w);aspect-ratio:1148/968;right:calc(var(--w) * -0.25);bottom:calc(var(--w) * -0.25);-webkit-mask-image:url(art/web-2.png);mask-image:url(art/web-2.png)}
-.scene-layer[data-id="spider"].on{opacity:.85}
 .az{display:grid;justify-items:center;min-width:64px}
 .az-lbl{font:var(--t-label);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .az-val{font:500 .875rem/1.25rem var(--sans);font-variant-numeric:tabular-nums}
@@ -183,6 +166,38 @@ h1{font:var(--t-h1);letter-spacing:-.01em;margin:0;text-wrap:balance}
 
 .toast{position:fixed;z-index:60;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:calc(100% - 32px);padding:8px 16px;border-radius:12px;background:var(--ink);color:var(--bg);font:var(--t-small)}
 
+/* editorial line style (from the Figma reference): flat paper, hairline rules, square corners, serif display with mono labels.
+   Only looks change here; text, order and layout stay as they are. */
+.brand-name{font:400 2rem/2rem var(--display);letter-spacing:-.02em}
+.brand-name em{color:var(--accent)}
+h1{letter-spacing:-.02em}
+.label,.tab-type,.brand-sub,.hint,.scalebar-mode,.az-lbl{letter-spacing:.14em}
+.icon-btn,.rail,.rail-btn,.ringctl,.pill,.lens,.toast,[data-tip]::after,.dot-btn span,.dot-btn[aria-current="true"] span,.tab-dot{border-radius:0}
+.icon-btn{background:var(--bg);border-color:var(--line-strong)}
+.icon-btn:hover,.tab:hover{border-color:var(--ink)}
+[data-tip]::after{font:400 .6875rem/1rem var(--mono)}
+.tabs{gap:0}
+.tab{position:relative;border-radius:0;background:var(--bg);border-color:var(--line-strong)}
+.tab + .tab{margin-left:-1px}
+.tab[aria-selected="true"]{z-index:1;background:var(--sunk);border-color:var(--accent)}
+.tab[aria-selected="true"] .tab-name{color:var(--accent)}
+.tab-ico{width:28px;height:28px;justify-self:center;background:transparent;border:1px solid var(--line-strong);color:var(--ink)}
+.tab-ico svg.i{width:18px;height:18px}
+.tab[aria-selected="true"] .tab-ico{background:transparent;border-color:var(--accent);color:var(--accent)}
+.tab-dot{width:6px;height:6px}
+.stage{border-radius:0;border-color:var(--line);background:var(--bg)}
+.rail,.ringctl{background:var(--bg);border-color:var(--line-strong)}
+.scalebar-bar{border-width:1px}
+.card{border-radius:0;background:var(--bg)}
+.pill{height:26px;background:transparent;border-color:var(--line-strong);font:400 .6875rem/1rem var(--mono);letter-spacing:.04em}
+.t-v{font:400 .75rem/1.25rem var(--mono)}
+.az-val{font:400 .8125rem/1.25rem var(--mono)}
+/* hairline between the model and the details, running up to the tabs */
+@media (min-width:961px){
+  .main .panel{position:relative}
+  .main .panel::before{content:"";position:absolute;top:calc(-1 * var(--gutter));bottom:0;left:calc(var(--gutter) / -2);border-left:1px solid var(--line)}
+}
+
 @media (max-width:960px){
   .split{grid-template-columns:minmax(0,1fr);row-gap:16px}
   .nav.split{grid-template-columns:minmax(0,1fr) auto;column-gap:12px}
@@ -196,7 +211,6 @@ h1{font:var(--t-h1);letter-spacing:-.01em;margin:0;text-wrap:balance}
 </style>
 </head><body>
 
-<div class="scene" id="scene" aria-hidden="true"></div>
 <div class="shell">
   <header class="nav split">
     <div class="brand">
@@ -334,135 +348,7 @@ function renderPanel(i){
   $("#closeTitle").textContent = c.closeup[0]; $("#closeText").textContent = c.closeup[1];
   $("#closeIco").innerHTML = svg(GLYPH[c.id]);
   $("#quote").textContent = c.quote;
-  setScene(i);
 }
-/* ---------- habitat scenes: hand-drawn style page background ---------- */
-const SC = (() => {
-  let s = 1;
-  const rnd = (a, b) => { s = (s*16807) % 2147483647; return a + (b-a)*(s/2147483647); };
-  const pick = arr => arr[Math.floor(rnd(0, arr.length))];
-  const seed = v => { s = v; };
-  const f = v => v.toFixed(1);
-  const INK = `stroke="var(--sketch)" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"`;
-  /* wobble filter: makes every line look drawn by hand */
-  const defs = id => `<defs><filter id="${id}" x="-5%" y="-5%" width="110%" height="110%"><feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4"/><feDisplacementMap in="SourceGraphic" scale="3.2"/></filter></defs>`;
-
-  /* scatter points over the page, skipping some for an airy feel */
-  function scatter(cols, rows, keep){
-    const pts = [];
-    for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
-      if(rnd(0,1) > keep) continue;
-      pts.push([(c + rnd(.15,.85)) * 1600/cols, (r + rnd(.15,.85)) * 1000/rows]);
-    }
-    return pts;
-  }
-
-  /* --- flower heads, no stems; every head picks its own colour --- */
-  const PAL = ["var(--petal)","var(--petal-2)","var(--petal-3)","var(--petal-4)","var(--petal-5)","var(--petal-6)","var(--petal-7)"];
-  const FLOWERS = [
-    function daisy(x,y,r){ const dc = rnd(0,1) < .5 ? "var(--daisy)" : pick(PAL); let g=""; for(let q=0;q<12;q++) g += `<ellipse cx="${f(x)}" cy="${f(y-r*.62)}" rx="${f(r*.2)}" ry="${f(r*.5)}" transform="rotate(${q*30} ${f(x)} ${f(y)})" fill="${dc}" ${INK}/>`;
-      g += `<circle cx="${f(x)}" cy="${f(y)}" r="${f(r*.3)}" fill="var(--bloom-centre)" ${INK}/>`;
-      for(let q=0;q<5;q++) g += `<circle cx="${f(x+rnd(-r*.15,r*.15))}" cy="${f(y+rnd(-r*.15,r*.15))}" r="1" fill="var(--sketch)"/>`; return g; },
-    function fivePetal(x,y,r){ const c = pick(PAL); let g="";
-      for(let q=0;q<5;q++) g += `<circle cx="${f(x)}" cy="${f(y-r*.5)}" r="${f(r*.45)}" transform="rotate(${q*72} ${f(x)} ${f(y)})" fill="${c}" ${INK}/>`;
-      return g + `<circle cx="${f(x)}" cy="${f(y)}" r="${f(r*.22)}" fill="var(--petal-2)" ${INK}/>`; },
-    function tulip(x,y,r){ const c = pick(PAL);
-      return `<path d="M${f(x-r*.6)} ${f(y-r*.5)} Q${f(x-r*.7)} ${f(y+r*.6)} ${f(x)} ${f(y+r*.6)} Q${f(x+r*.7)} ${f(y+r*.6)} ${f(x+r*.6)} ${f(y-r*.5)} L${f(x+r*.3)} ${f(y-r*.1)} L${f(x)} ${f(y-r*.6)} L${f(x-r*.3)} ${f(y-r*.1)}Z" fill="${c}" ${INK}/>`; },
-    function cosmos(x,y,r){ const c = pick(PAL); let g="";
-      for(let q=0;q<8;q++) g += `<path d="M${f(x)} ${f(y)} L${f(x-r*.28)} ${f(y-r*.9)} L${f(x-r*.1)} ${f(y-r)} L${f(x)} ${f(y-r*.88)} L${f(x+r*.1)} ${f(y-r)} L${f(x+r*.28)} ${f(y-r*.9)}Z" transform="rotate(${q*45} ${f(x)} ${f(y)})" fill="${c}" ${INK}/>`;
-      return g + `<circle cx="${f(x)}" cy="${f(y)}" r="${f(r*.24)}" fill="var(--bloom-centre)" ${INK}/>`; },
-    function peony(x,y,r){ const c = pick(PAL); let g="";
-      /* three rings of rounded, ruffled petals, largest at the back */
-      [[8,.5,.42,0],[7,.32,.34,20],[6,.16,.26,40]].forEach(([n,d,pr,off]) => {
-        for(let q=0;q<n;q++){ const a = (q*360/n + off)*Math.PI/180, px = x+Math.cos(a)*r*d, py = y+Math.sin(a)*r*d, w = r*pr;
-          g += `<path d="M${f(px-w)} ${f(py)} Q${f(px-w)} ${f(py-w*1.1)} ${f(px-w*.35)} ${f(py-w*.9)} Q${f(px)} ${f(py-w*1.25)} ${f(px+w*.35)} ${f(py-w*.9)} Q${f(px+w)} ${f(py-w*1.1)} ${f(px+w)} ${f(py)} Q${f(px+w)} ${f(py+w)} ${f(px)} ${f(py+w)} Q${f(px-w)} ${f(py+w)} ${f(px-w)} ${f(py)}Z" transform="rotate(${f(a*180/Math.PI+90)} ${f(px)} ${f(py)})" fill="${c}" ${INK}/>`; }
-      });
-      return g + `<circle cx="${f(x)}" cy="${f(y)}" r="${f(r*.12)}" fill="var(--petal-2)" ${INK}/>`; },
-    function buttercup(x,y,r){ const bc = pick(PAL); let g=""; for(let q=0;q<3;q++){ const xx=x+rnd(-r*.6,r*.6), yy=y+rnd(-r*.6,r*.6), rr=r*rnd(.3,.42);
-        for(let p=0;p<5;p++) g += `<circle cx="${f(xx)}" cy="${f(yy-rr*.55)}" r="${f(rr*.5)}" transform="rotate(${p*72} ${f(xx)} ${f(yy)})" fill="${bc}" ${INK}/>`;
-        g += `<circle cx="${f(xx)}" cy="${f(yy)}" r="${f(rr*.25)}" fill="var(--bloom-centre)"/>`; } return g; }
-  ];
-  /* flowers: big and small mixed (more small ones), placed so no two heads touch */
-  function flowers(sd){
-    seed(sd);
-    const placed = [];
-    for(let tries=0; tries<4000 && placed.length<44; tries++){
-      const r = 14 + 60*Math.pow(rnd(0,1), 1.7), x = rnd(-20, 1620), y = rnd(-20, 1020);
-      if(placed.every(([px,py,pr]) => Math.hypot(px-x, py-y) > (pr + r)*1.15 + 22)) placed.push([x,y,r]);
-    }
-    placed[36][0] = 160; placed[36][1] = 890; /* moved out from under the title into a free spot */
-    return placed.map(([x,y,r]) => `<g transform="rotate(${f(rnd(-40,40))} ${f(x)} ${f(y)})">${pick(FLOWERS)(x,y,r)}</g>`).join("");
-  }
-
-  /* --- orb web whose hub sits right in the corner --- */
-  function cornerWeb(sd, size){
-    seed(sd);
-    const spokes = []; for(let a=4; a<=86; a+=rnd(9,13)) spokes.push(a*Math.PI/180);
-    const P = (a,r) => [Math.cos(a)*r, Math.sin(a)*r];
-    let g = spokes.map(a => { const [x,y] = P(a, size*1.05); return `<line x1="0" y1="0" x2="${f(x)}" y2="${f(y)}"/>`; }).join("");
-    g += `<line x1="0" y1="0" x2="${f(size*1.1)}" y2="0"/><line x1="0" y1="0" x2="0" y2="${f(size*1.1)}"/>`;
-    for(let r=size*.08; r<size; r+=rnd(size*.055,size*.075)){
-      let d = ""; const all = [0, ...spokes, Math.PI/2];
-      for(let i=0;i<all.length-1;i++){
-        const [x1,y1] = P(all[i],r), [x2,y2] = P(all[i+1],r), m = (all[i]+all[i+1])/2, [mx,my] = P(m, r*.9);
-        d += `M${f(x1)} ${f(y1)} Q${f(mx)} ${f(my)} ${f(x2)} ${f(y2)}`;
-      }
-      g += `<path d="${d}" fill="none"/>`;
-    }
-    let dew = ""; for(let k=0;k<10;k++){ const [x,y] = P(pick(spokes), rnd(size*.15, size*.9)); dew += `<circle cx="${f(x)}" cy="${f(y)}" r="${f(rnd(2,3.4))}" fill="var(--dew)" stroke="var(--web)" stroke-width="1"/>`; }
-    return `<g stroke="var(--web)" stroke-width="1.3" stroke-linecap="round">${g}</g>${dew}`;
-  }
-
-  /* --- leaves: a few shapes, outlined, with veins --- */
-  function leafShape(L, W, kind){
-    if(kind === 0) return `M0 0 C${f(L*.3)} ${f(-W)} ${f(L*.75)} ${f(-W)} ${f(L)} 0 C${f(L*.75)} ${f(W)} ${f(L*.3)} ${f(W)} 0 0Z`;
-    if(kind === 1) return `M0 0 C${f(L*.2)} ${f(-W*1.2)} ${f(L*.9)} ${f(-W*.8)} ${f(L)} 0 C${f(L*.9)} ${f(W*.8)} ${f(L*.2)} ${f(W*1.2)} 0 0Z`;
-    return `M0 0 C${f(L*.1)} ${f(-W*1.3)} ${f(L*.6)} ${f(-W*1.1)} ${f(L)} 0 C${f(L*.6)} ${f(W*1.1)} ${f(L*.1)} ${f(W*1.3)} 0 0Z`;
-  }
-  function spread(n, gap){
-    const pts = [];
-    for(let tries=0; tries<2000 && pts.length<n; tries++){
-      const x = rnd(-40, 1640), y = rnd(-40, 1040);
-      if(y < 170 && rnd(0,1) < .6) continue;
-      if(pts.every(([px,py]) => (px-x)**2 + (py-y)**2 > gap*gap)) pts.push([x,y]);
-    }
-    return pts;
-  }
-  function leaves(sd){
-    seed(sd);
-    let aphidsLeft = 3;
-    const pts = []; for(let k=0;k<44;k++) pts.push([rnd(-80,1680), rnd(-80,1080)]);
-    /* four leaves that sat hidden behind the stage now peek over the spider and ladybug tabs */
-    [[4,640,70],[28,860,80],[30,1150,66],[36,1420,78]].forEach(([i,x,y]) => { pts[i] = [x,y]; });
-    /* clear the panel text: three leaves removed, four moved down to the bottom-right */
-    [[1,1470,950],[9,1580,990],[25,1430,800],[34,1530,770],[5,-2000,-2000],[32,-2000,-2000],[38,-2000,-2000]].forEach(([i,x,y]) => { pts[i] = [x,y]; });
-    /* the big leaf by the tags now lies in the space beside the species name */
-    pts[37] = [1335, 256]; const turn = {37: -3};
-    return pts.map(([x,y], idx) => {
-      const L = 60 + 250*Math.pow(rnd(0,1), 1.4), W = L*rnd(.26,.36), kind = Math.floor(rnd(0,3)), a = rnd(0,360), fill = pick(["var(--leaf)","var(--leaf-2)","var(--leaf-3)"]);
-      let g = `<path d="M${f(-L*.18)} 0 L0 0" stroke="var(--stem)" stroke-width="3" stroke-linecap="round"/><path d="${leafShape(L,W,kind)}" fill="${fill}" ${INK}/>`;
-      g += `<path d="M0 0 Q${f(L*.5)} ${f(-W*.08)} ${f(L*.95)} 0" fill="none" stroke="var(--vein)" stroke-width="1.4"/>`;
-      for(let i=1;i<5;i++){ const vx = L*i/5.2; g += `<path d="M${f(vx)} 0 Q${f(vx+L*.08)} ${f(-W*.35)} ${f(vx+L*.16)} ${f(-W*.62)}M${f(vx)} 0 Q${f(vx+L*.08)} ${f(W*.35)} ${f(vx+L*.16)} ${f(W*.62)}" fill="none" stroke="var(--vein)" stroke-width="1" opacity=".8"/>`; }
-      if(aphidsLeft > 0 && rnd(0,1) < .3){ aphidsLeft--; for(let q=0;q<3;q++){ const ax = L*rnd(.3,.7), ay = W*rnd(-.3,.3); g += `<ellipse cx="${f(ax)}" cy="${f(ay)}" rx="5" ry="3.4" fill="var(--aphid)" ${INK} stroke-width="1"/>`; } }
-      return `<g transform="translate(${f(x)} ${f(y)}) rotate(${f(idx in turn ? turn[idx] : a)})">${g}</g>`;
-    }).join("");
-  }
-
-  /* the wobble filter covers the whole page-sized drawing; phones (small, high-density screens) can fail to paint it, so it is skipped there */
-  const wobble = !(matchMedia("(max-width:960px)").matches || matchMedia("(pointer:coarse)").matches);
-  const full = (id, body) => `<svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" style="inset:0;width:100%;height:100%" aria-hidden="true">${defs(id)}<g${wobble ? ` filter="url(#${id})"` : ""}>${body}</g></svg>`;
-  const corner = (id, body, style, flip) => `<svg viewBox="0 0 420 420" style="${style}${flip}" aria-hidden="true">${defs(id)}<g filter="url(#${id})">${body}</g></svg>`;
-  return {
-    luna: full("rough-luna", flowers(13)),
-    /* the user's web drawing, used as a mask so it takes the page's web colour in both themes;
-       each web is pulled out past its corner so the hub sits close to it */
-    spider: `<div class="web-art web-1"></div><div class="web-art web-2"></div>`,
-    ladybug: full("rough-leaf", leaves(5))
-  };
-})();
-const sceneEl = $("#scene");
-sceneEl.innerHTML = CREATURES.map(c => `<div class="scene-layer" data-id="${c.id}">${SC[c.id] || ""}</div>`).join("");
-function setScene(i){ [...sceneEl.children].forEach((el,j) => el.classList.toggle("on", j===i)); }
 
 renderPanel(0); setActiveUI(0);
 
